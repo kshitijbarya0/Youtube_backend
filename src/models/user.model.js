@@ -56,10 +56,10 @@ userModel.pre("save",async function (next){
     this.password = await bcrypt.hash(this.password,10)
     next();
 })
-userModel.method.isPasswordCorrect = async function(password){
-    return await bcrypt.compare(password,this.password);
+userModel.methods.isPasswordCorrect = async function(password){
+    return await bcrypt.compare(password, this.password)
 }
-userModel.method.generateAccessToken = function(){
+userModel.methods.generateAccessToken = function(){
      return jwt.sign(
       {
         _id: this._id,
@@ -70,7 +70,7 @@ userModel.method.generateAccessToken = function(){
       }
     )
 }
-userModel.method.generateRefreshToken = function(){
+userModel.methods.generateRefreshToken = function(){
     return jwt.sign(
         {
           _id: this._id,
